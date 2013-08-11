@@ -19,6 +19,7 @@
       'animationSpeed': 250,
       'transitionOpacity': true,
       'buttonSelector': '.menu-button',
+      'accordion': false,
       'hoverIntent': false,
       'hoverIntentTimeout': 150
     }, options);
@@ -86,7 +87,9 @@
     };
     $(settings['buttonSelector']).data('navEl', $nav);
     selector = '.item-with-ul, ' + settings['buttonSelector'];
-    $(selector).append('<span class="touch-button"><i class="navicon">&#9660;</i></span>');
+    if ($(selector).children('> span').length === 0) {
+      $(selector).append('<span class="touch-button"><i class="navicon">&#9660;</i></span>');
+    }
     selector = settings['buttonSelector'] + ', ' + settings['buttonSelector'] + ' .touch-button';
     $(selector).on('touchstart click', function(e) {
       var $btnParent, $thisNav, bs;
@@ -131,7 +134,9 @@
       return $(this).parent('.item-with-ul').find('>ul').addClass("open").show();
     });
     resizer();
-    return $(window).on('resize', resizer);
+    if (settings.accordion === !true) {
+      return $(window).on('resize', resizer);
+    }
   };
 
 }).call(this);

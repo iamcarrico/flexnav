@@ -93,10 +93,11 @@ p {
   #content h2 {
     font-size: 1.6em;
     color: #3a3261; }
-  #content ul {
-    margin: 1em;
-    list-style-type: circle; }
-  #content li {
+
+ul.content-list {
+  margin: 1em;
+  list-style-type: circle; }
+  ul.content-list li {
     font-size: 1em;
     margin-bottom: .4em;
     margin-left: .75em;
@@ -148,6 +149,9 @@ code {
 #section2, #section3, #section4, #section5 {
   padding-top: 80px; }
 
+.flexnav-accordion {
+  margin-top: 1em; }
+
 @media all and (min-width: 800px) {
   body {
     font-size: 100%; }
@@ -175,9 +179,10 @@ code {
   #content article {
     width: 50%;
     float: left;
-    overflow: hidden; }
-  #content li {
-    font-size: 1.1em; } }
+    overflow: hidden; } }
+ul.content-list li {
+  font-size: 1.1em; }
+
 .oldie body {
   font-size: 100%; }
   .oldie body.home-page #site-header {

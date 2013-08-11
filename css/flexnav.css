@@ -24,11 +24,18 @@
     top: 50px;
     right: 5%;
     max-width: 200px; }
-  .flexnav li {
+
+.flexnav,
+.flexnav-accordion {
+  margin: 0;
+  padding: 0; }
+  .flexnav li,
+  .flexnav-accordion li {
     font-size: 100%;
     position: relative;
     overflow: hidden; }
-  .flexnav li a {
+  .flexnav li a,
+  .flexnav-accordion li a {
     position: relative;
     display: block;
     padding: .96em;
@@ -37,22 +44,29 @@
     color: #222222;
     background: #a6a6a2;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
-  .flexnav li ul {
+  .flexnav li ul,
+  .flexnav-accordion li ul {
     width: 100%; }
-    .flexnav li ul li {
+    .flexnav li ul li,
+    .flexnav-accordion li ul li {
       font-size: 100%;
       position: relative;
       overflow: hidden; }
-  .flexnav li ul.show li {
+  .flexnav li ul.show li,
+  .flexnav-accordion li ul.show li {
     overflow: visible; }
-  .flexnav li ul li a {
+  .flexnav li ul li a,
+  .flexnav-accordion li ul li a {
     display: block;
     background: #b2b2af; }
-  .flexnav ul li ul li a {
+  .flexnav ul li ul li a,
+  .flexnav-accordion ul li ul li a {
     background: #bfbfbc; }
-  .flexnav ul li ul li ul li a {
+  .flexnav ul li ul li ul li a,
+  .flexnav-accordion ul li ul li ul li a {
     background: #cbcbc9; }
-  .flexnav .touch-button {
+  .flexnav .touch-button,
+  .flexnav-accordion .touch-button {
     position: absolute;
     z-index: 999;
     top: 0;
@@ -63,9 +77,11 @@
     background: #acaca1;
     background: rgba(0, 0, 0, 0.075);
     text-align: center; }
-    .flexnav .touch-button:hover {
+    .flexnav .touch-button:hover,
+    .flexnav-accordion .touch-button:hover {
       cursor: pointer; }
-    .flexnav .touch-button .navicon {
+    .flexnav .touch-button .navicon,
+    .flexnav-accordion .touch-button .navicon {
       position: relative;
       top: 1.4em;
       font-size: 12px;

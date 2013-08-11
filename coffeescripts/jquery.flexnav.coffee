@@ -15,6 +15,7 @@ $.fn.flexNav = (options) ->
     'animationSpeed': 250,
     'transitionOpacity': true,
     'buttonSelector': '.menu-button',
+    'accordion': false,
     'hoverIntent': false,
     'hoverIntentTimeout': 150
     options
@@ -100,7 +101,8 @@ $.fn.flexNav = (options) ->
 
   # Add in touch buttons
   selector = '.item-with-ul, ' + settings['buttonSelector']
-  $(selector).append('<span class="touch-button"><i class="navicon">&#9660;</i></span>')
+  if $(selector).children('> span').length is 0
+    $(selector).append('<span class="touch-button"><i class="navicon">&#9660;</i></span>')
 
   # Toggle touch for nav menu
   selector = settings['buttonSelector'] + ', ' + settings['buttonSelector'] + ' .touch-button'
@@ -150,4 +152,5 @@ $.fn.flexNav = (options) ->
   resizer()
 
   # Call on browser resize
-  $(window).on('resize', resizer)
+  if settings.accordion is not true
+    $(window).on('resize', resizer)
