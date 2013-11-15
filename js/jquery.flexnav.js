@@ -14,14 +14,12 @@
   $ = jQuery;
 
   $.fn.flexNav = function(options) {
-    var $nav, $top_nav_items, breakpoint, count, nav_percent, nav_width, resetMenu, resizer, settings, showMenu, toggle_selector, touch_selector;
+    var $nav, resetMenu, resizer, settings, showMenu, toggle_selector;
     settings = $.extend({
-      'animationSpeed': 250,
       'transitionOpacity': true,
       'buttonSelector': '.menu-button',
       'hoverIntent': false,
-      'hoverIntentTimeout': 150,
-      'calcItemWidths': false
+      'hoverIntentTimeout': 150
     }, options);
     $nav = $(this);
     $nav.addClass('with-js');
@@ -30,78 +28,41 @@
     }
     $nav.find("li").each(function() {
       if ($(this).has("ul").length) {
-        return $(this).addClass("item-with-ul").find("ul").hide();
+        return $(this).addClass("item-with-ul").find("ul");
       }
     });
-    if (settings.calcItemWidths === true) {
-      $top_nav_items = $nav.find('>li');
-      count = $top_nav_items.length;
-      nav_width = 100 / count;
-      nav_percent = nav_width + "%";
-    }
-    if ($nav.data('breakpoint')) {
-      breakpoint = $nav.data('breakpoint');
-    }
     showMenu = function() {
       if ($nav.hasClass('lg-screen') === true) {
         if (settings.transitionOpacity === true) {
-          return $(this).find('>ul').addClass('show').stop(true, true).animate({
-            height: ["toggle", "swing"],
-            opacity: "toggle"
-          }, settings.animationSpeed);
+          return $(this).find('>ul').addClass('show');
         } else {
-          return $(this).find('>ul').addClass('show').stop(true, true).animate({
-            height: ["toggle", "swing"]
-          }, settings.animationSpeed);
+          return $(this).find('>ul').addClass('show');
         }
       }
     };
     resetMenu = function() {
       if ($nav.hasClass('lg-screen') === true && $(this).find('>ul').hasClass('show') === true) {
         if (settings.transitionOpacity === true) {
-          return $(this).find('>ul').removeClass('show').stop(true, true).animate({
-            height: ["toggle", "swing"],
-            opacity: "toggle"
-          }, settings.animationSpeed);
+          return $(this).find('>ul').removeClass('show');
         } else {
-          return $(this).find('>ul').removeClass('show').stop(true, true).animate({
-            height: ["toggle", "swing"]
-          }, settings.animationSpeed);
+          return $(this).find('>ul').removeClass('show');
         }
       }
     };
     resizer = function() {
-      var selector;
-      if ($(window).width() <= breakpoint) {
-        $nav.removeClass("lg-screen").addClass("sm-screen");
-        if (settings.calcItemWidths === true) {
-          $top_nav_items.css('width', '100%');
-        }
-        selector = settings['buttonSelector'] + ', ' + settings['buttonSelector'] + ' .touch-button';
-        $(selector).removeClass('active');
-        return $('.one-page li a').on('click', function() {
-          return $nav.removeClass('show');
+      $nav.removeClass("sm-screen").addClass("lg-screen");
+      $nav.removeClass('show');
+      if (settings.hoverIntent === true) {
+        return $('.item-with-ul').hoverIntent({
+          over: showMenu,
+          out: resetMenu,
+          timeout: settings.hoverIntentTimeout
         });
-      } else if ($(window).width() > breakpoint) {
-        $nav.removeClass("sm-screen").addClass("lg-screen");
-        if (settings.calcItemWidths === true) {
-          $top_nav_items.css('width', nav_percent);
-        }
-        $nav.removeClass('show');
-        if (settings.hoverIntent === true) {
-          return $('.item-with-ul').hoverIntent({
-            over: showMenu,
-            out: resetMenu,
-            timeout: settings.hoverIntentTimeout
-          });
-        } else if (settings.hoverIntent === false) {
-          return $('.item-with-ul').on('mouseenter', showMenu).on('mouseleave', resetMenu);
-        }
+      } else if (settings.hoverIntent === false) {
+        return $('.item-with-ul').on('mouseenter', showMenu).on('mouseleave', resetMenu);
       }
     };
     $(settings['buttonSelector']).data('navEl', $nav);
-    touch_selector = '.item-with-ul, ' + settings['buttonSelector'];
-    $(touch_selector).append('<span class="touch-button"><i class="navicon">&#9660;</i></span>');
     toggle_selector = settings['buttonSelector'] + ', ' + settings['buttonSelector'] + ' .touch-button';
     $(toggle_selector).on('click', function(e) {
       var $btnParent, $thisNav, bs;
@@ -118,19 +79,19 @@
       $sub = $(this).parent('.item-with-ul').find('>ul');
       $touchButton = $(this).parent('.item-with-ul').find('>span.touch-button');
       if ($nav.hasClass('lg-screen') === true) {
-        $(this).parent('.item-with-ul').siblings().find('ul.show').removeClass('show').hide();
+        $(this).parent('.item-with-ul').siblings().find('ul.show').removeClass('show');
       }
       if ($sub.hasClass('show') === true) {
-        $sub.removeClass('show').slideUp(settings.animationSpeed);
+        $sub.removeClass('show');
         return $touchButton.removeClass('active');
       } else if ($sub.hasClass('show') === false) {
-        $sub.addClass('show').slideDown(settings.animationSpeed);
+        $sub.addClass('show');
         return $touchButton.addClass('active');
       }
     });
     $nav.find('.item-with-ul *').focus(function() {
-      $(this).parent('.item-with-ul').parent().find(".open").not(this).removeClass("open").hide();
-      return $(this).parent('.item-with-ul').find('>ul').addClass("open").show();
+      $(this).parent('.item-with-ul').parent().find(".open").not(this).removeClass("open");
+      return $(this).parent('.item-with-ul').find('>ul').addClass("open");
     });
     resizer();
     return $(window).on('resize', resizer);
