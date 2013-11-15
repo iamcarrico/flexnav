@@ -1,14 +1,16 @@
 {
-    "name": "flexnav",
-    "version": "2.0.0",
-    "repository": "https://github.com/indyplanets/flexnav",
-    "license": "http://unlicense.org/",
-    "devDependencies": {
-        "grunt": "0.4.x",
-        "grunt-contrib-coffee": "0.7.x",
-        "grunt-contrib-sass": "0.5.x",
-        "grunt-coffeelint": "0.0.x",
-        "grunt-contrib-uglify": "0.2.x",
-        "grunt-contrib-watch": "0.5.x"
-    }
+  "name": "flexnav",
+  "version": "2.0.0",
+  "repository": "https://github.com/indyplanets/flexnav",
+  "license": "http://unlicense.org/",
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-coffee": "0.7.x",
+    "grunt-contrib-compass": "~0.2.0",
+    "grunt-coffeelint": "0.0.x",
+    "grunt-contrib-uglify": "0.2.x",
+    "grunt-contrib-watch": "0.5.x",
+    "grunt-devserver": "~0.5.0",
+    "grunt-concurrent": "~0.4.1"
+  }
 }
