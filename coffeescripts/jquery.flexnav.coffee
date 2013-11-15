@@ -36,10 +36,10 @@ $.fn.flexNav = (options) ->
     count = $top_nav_items.length
     nav_width = 100 / count
     nav_percent = nav_width+"%"
-  
+
   # Get the breakpoint set with data-breakpoint
   if $nav.data('breakpoint') then breakpoint = $nav.data('breakpoint')
-	
+
   # Functions for hover support
   showMenu = ->
     if $nav.hasClass('lg-screen') is true
@@ -107,7 +107,7 @@ $.fn.flexNav = (options) ->
         )
       else if settings.hoverIntent is false
         $('.item-with-ul').on('mouseenter', showMenu).on('mouseleave', resetMenu)
-	
+
   # Set navigation element for this instantiation
   $(settings['buttonSelector']).data('navEl', $nav)
 
@@ -126,7 +126,7 @@ $.fn.flexNav = (options) ->
     $thisNav = $btnParent.data('navEl')
     $thisNav.toggleClass('show')
   )
-				
+
   # Toggle for sub-menus
   $('.touch-button').on('click', (e) ->
     $sub = $(@).parent('.item-with-ul').find('>ul')
@@ -142,7 +142,7 @@ $.fn.flexNav = (options) ->
       $sub.addClass('show').slideDown(settings.animationSpeed)
       $touchButton.addClass('active')
   )
-	
+
   # Sub ul's should have a class of 'open' if an element has focus
   $nav.find('.item-with-ul *').focus ->
     # remove class of open from all elements that are not focused
